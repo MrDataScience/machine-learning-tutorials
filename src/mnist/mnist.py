@@ -11,7 +11,8 @@ import matplotlib.pyplot as plt
 
 def erase_middle(image: torch.Tensor) -> torch.Tensor:
     all, height, width = image.size()
-    image[:, 14, :] = 1.0
+    image[:, 10:20, :] = image[:, 14, :]
+
     return image
 
 

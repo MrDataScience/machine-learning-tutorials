@@ -2,17 +2,34 @@ import torch
 from torch.utils.data import Dataset
 from torchvision import datasets
 from torchvision.transforms import ToTensor
+from torchvision.transforms import v2
+from torchvision.transforms import Compose, Lambda
 import matplotlib.pyplot as plt
 
 
 # source: https://pytorch.org/tutorials/beginner/basics/data_tutorial.html
 
+def erase_middle(image: torch.Tensor) -> torch.Tensor:
+    all, height, width = image.size()
+    image[:, 14, :] = 1.0
+    return image
+
+
 def load_data(data_set, transformer) -> tuple:
+    special = Compose(
+        [
+            # First transform it to a tensor
+            ToTensor(),
+            # Then erase the middle
+            Lambda(erase_middle),
+        ]
+    )
+
     training_data = data_set(
         root="data",
         train=True,
         download=True,
-        transform=transformer
+        transform=special
     )
 
     test_data = data_set(

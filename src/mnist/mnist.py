@@ -5,6 +5,8 @@ from torchvision.transforms import ToTensor
 import matplotlib.pyplot as plt
 
 
+# source: https://pytorch.org/tutorials/beginner/basics/data_tutorial.html
+
 def load_data(data_set, transformer) -> tuple:
     training_data = data_set(
         root="data",

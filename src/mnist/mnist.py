@@ -20,7 +20,11 @@ def change_pix_values(image: torch.Tensor, row_i: int, row_j: int, pix_val: floa
 
 
 class MyLambda(Lambda):
-    """custom lambda class that will support arguments"""
+    """
+    custom lambda class that will support arguments
+
+    source: https://discuss.pytorch.org/t/how-to-pass-two-arguments-in-transforms-lambda-func-name/151734
+    """
 
     def __init__(self, lambd, row_i, row_j, pix_val):
         super().__init__(lambd)
